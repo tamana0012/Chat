@@ -1,0 +1,233 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Application</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .chat-box{
+        background:#ffffff;
+        width:350px;
+        padding:20px;
+        border-radius:12px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        display:flex;
+        flex-direction:column;
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:15px;
+        color:#1e3a8a;
+    }
+
+    .messages{
+        border:1px solid #e5e7eb;
+        height:200px;
+        border-radius:8px;
+        padding:10px;
+        margin-bottom:15px;
+        overflow-y:auto;
+        background:#f9fafb;
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+    }
+
+    .messages span{
+        background:#e0e7ff;
+        padding:6px 10px;
+        border-radius:6px;
+        font-size:14px;
+        max-width:80%;
+        align-self:flex-start;
+    }
+
+    .input-area{
+        display:flex;
+        gap:8px;
+    }
+
+    input{
+        flex:1;
+        padding:10px;
+        border-radius:8px;
+        border:1px solid #cbd5e1;
+        outline:none;
+    }
+
+    button{
+        padding:10px 15px;
+        border:none;
+        border-radius:8px;
+        background:#1e3a8a;
+        color:white;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    button:hover{
+        background:#2563eb;
+    }
+
+    @media(max-width:400px){
+        .chat-box{
+            width:95%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="chat-box">
+    <h1>Chatting Application</h1>
+
+    <div class="messages" id="messages">
+    
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="txt" placeholder="Enter your message">
+        <button id="btn">Send</button>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+var socket = io();
+const div = document.querySelector('.messages');
+const btn = document.querySelector("#btn");
+let inp = document.querySelector('#txt');
+
+
+socket.on('message' , (msg)=>{
+    const span = document.createElement('span');
+    span.textContent = msg;
+    div.appendChild(span);
+
+    div.scrollTop = div.scrollHeight;
+})
+
+btn.addEventListener('click' , ()=>{
+    let inputValue = inp.value.trim();
+
+    if(inputValue !== ""){
+        socket.emit('message' , inputValue);
+        inp.value = "";
+    }
+})
+
+inp.addEventListener("keypress" , (e)=>{
+    if(e.key === "Enter"){
+        btn.click();
+    }
+})
+
+</script>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Chat App</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="chat-container">
+
+    <!-- Username input -->
+    <div class="username-area" id="usernameArea">
+        <input type="text" id="usernameInput" placeholder="Enter your name">
+        <button id="usernameBtn">Join Chat</button>
+    </div>
+
+    <!-- Chat interface -->
+    <div class="chat-area" id="chatArea" style="display:none;">
+        <div class="messages" id="messages"></div>
+
+        <div class="input-area">
+            <input type="text" id="txt" placeholder="Type a message...">
+            <button id="btn">Send</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+const usernameArea = document.getElementById('usernameArea');
+const usernameInput = document.getElementById('usernameInput');
+const usernameBtn = document.getElementById('usernameBtn');
+const chatArea = document.getElementById('chatArea');
+const messagesDiv = document.getElementById('messages');
+const input = document.getElementById('txt');
+const btn = document.getElementById('btn');
+
+let username = "";
+
+usernameBtn.addEventListener('click', () => {
+    const name = usernameInput.value.trim();
+    if(name){
+        username = name;
+        socket.emit('set-username', username);
+        usernameArea.style.display = 'none';
+        chatArea.style.display = 'flex';
+        input.focus();
+    }
+});
+
+btn.addEventListener('click', sendMessage);
+input.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') sendMessage();
+});
+
+function sendMessage(){
+    const msg = input.value.trim();
+    if(msg){
+        socket.emit('message', msg);
+        input.value = '';
+    }
+}
+
+socket.on('message', (msgData) => {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('message');
+    if(msgData.id === socket.id) msgDiv.classList.add('my-message');
+    else msgDiv.classList.add('other-message');
+
+    msgDiv.innerHTML = `
+        <p class="text">${msgData.text}</p>
+        <span class="info">${msgData.username} • ${msgData.time}</span>
+    `;
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+});
+</script>
+
+</body>
+</html>

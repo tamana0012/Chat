@@ -1,0 +1,153 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg, #ff758c, #ff7eb3); /* Pink gradient */
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.chat-container{
+    width:400px;
+    max-width:100%;
+    height:700px;
+    background:#ffffff;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+.username-area{
+    display:flex;
+    padding:15px;
+    gap:10px;
+    justify-content:center;
+    background:#ff4d6d; /* Dark pink */
+}
+
+.username-area input{
+    flex:1;
+    padding:12px 15px;
+    border-radius:12px;
+    border:none;
+    font-size:14px;
+}
+
+.username-area button{
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    background:#ff1e56; /* Vibrant red-pink */
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.username-area button:hover{
+    background:#e60048;
+}
+
+.chat-area{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+
+.messages{
+    flex:1;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    overflow-y:auto;
+    background:#fff0f5; /* Light pink */
+}
+
+.message{
+    max-width:75%;
+    padding:12px 18px;
+    border-radius:15px;
+    position:relative;
+    word-wrap: break-word;
+    font-size:14px;
+    line-height:1.4;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.1s;
+}
+
+.message:hover{
+    transform: scale(1.02);
+}
+
+.my-message{
+    align-self:flex-end;
+    background: #ff4d6d; /* Pink message */
+    color:white;
+    border-bottom-right-radius:4px;
+}
+
+.other-message{
+    align-self:flex-start;
+    background:#ffe6f0; /* Lighter pink for other messages */
+    color:#333;
+    border-bottom-left-radius:4px;
+}
+
+.message .info{
+    display:block;
+    font-size:11px;
+    margin-top:5px;
+    opacity:0.7;
+}
+
+.input-area{
+    display:flex;
+    padding:12px;
+    background:#ffffff;
+    gap:10px;
+}
+
+.input-area input{
+    flex:1;
+    padding:12px 18px;
+    border-radius:25px;
+    border:1px solid #ffb6c1; /* Light pink border */
+    outline:none;
+    font-size:14px;
+}
+
+.input-area button{
+    padding:12px 20px;
+    border-radius:25px;
+    border:none;
+    background:#ff4d6d; /* Pink send button */
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.input-area button:hover{
+    background:#ff1e56;
+}
+
+/* Scrollbar styling */
+.messages::-webkit-scrollbar{
+    width:8px;
+}
+.messages::-webkit-scrollbar-thumb{
+    background:rgba(255,77,109,0.4);
+    border-radius:4px;
+}
+.messages::-webkit-scrollbar-track{
+    background:transparent;
+}
