@@ -6,7 +6,7 @@
 }
 
 body{
-    background: linear-gradient(135deg, #ff758c, #ff7eb3); /* Pink gradient */
+    background: linear-gradient(135deg, #160b0d, #410303); /* Pink gradient */
     height:100vh;
     display:flex;
     justify-content:center;
@@ -30,7 +30,7 @@ body{
     padding:15px;
     gap:10px;
     justify-content:center;
-    background:#ff4d6d; /* Dark pink */
+    background:#6d5056; /* Dark pink */
 }
 
 .username-area input{
@@ -45,7 +45,7 @@ body{
     padding:12px 20px;
     border:none;
     border-radius:12px;
-    background:#ff1e56; /* Vibrant red-pink */
+    background:#6d6b6b; /* Vibrant red-pink */
     color:white;
     font-weight:bold;
     cursor:pointer;
@@ -90,7 +90,7 @@ body{
 
 .my-message{
     align-self:flex-end;
-    background: #ff4d6d; /* Pink message */
+    background: #086108; /* Pink message */
     color:white;
     border-bottom-right-radius:4px;
 }
@@ -129,7 +129,7 @@ body{
     padding:12px 20px;
     border-radius:25px;
     border:none;
-    background:#ff4d6d; /* Pink send button */
+    background:#1a1415; /* Pink send button */
     color:white;
     font-weight:bold;
     cursor:pointer;
