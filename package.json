@@ -4,5 +4,8 @@
     "express": "^5.1.0",
     "init": "^0.1.2",
     "socket.io": "^4.8.1"
+  },
+  "scripts": {
+    "start" : " node app.js"
   }
 }
